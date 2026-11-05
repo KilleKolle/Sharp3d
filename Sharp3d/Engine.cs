@@ -1,6 +1,9 @@
 namespace Sharp3d;
 
-public class engine
+public class Engine
 {
-    
+    public Engine()
+    {
+        
+    }
 }
