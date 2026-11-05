@@ -1,3 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
+namespace Sharp3d;
 
-Console.WriteLine("Hello, World!");
+public class Program
+{
+    
+}
