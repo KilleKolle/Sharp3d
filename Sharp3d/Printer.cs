@@ -4,30 +4,32 @@ public class Printer
 {
     public void Print(Framebuffer framebuffer)
     {
-        for (int loopY = 0; loopY < framebuffer.GetWidth(); loopY++)
+        //Converting every pixels brightness to ascii char
+        for (int loopY = 0; loopY < framebuffer.GetHeight(); loopY++)
         {
-            for (int loopX = 0; loopX < framebuffer.GetHeight(); loopX++)
+            for (int loopX = 0; loopX < framebuffer.GetWidth(); loopX++)
             {
-                
+                Console.Write(ToSymbol(framebuffer.GetPixel(loopX, loopY)));
             }
+            Console.WriteLine();
         }
     }
 
-    private String ToAscii(Byte brightness)
+    private string ToSymbol(byte brightness)
     {
         switch (brightness)
         {
+            //weights are tunable, still experimental
          case 0:
              return " ";
          case <=50:
-             return "·";
-         case <=100:
-             return "•";
+             return ".";
          case <=150:
-             return "▪";
-         case >=200:
-             return "■";
+             return ":";
+         case <=200:
+             return "#";
+         case >200:
+             return "@";
         }
-        return "E";
     }
 }

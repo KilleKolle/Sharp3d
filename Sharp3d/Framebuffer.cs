@@ -4,29 +4,34 @@ public class Framebuffer
 {
     private int _width;
     private int _height;
-    private Byte[] _framebuffer;
+    private byte[] _framebuffer;
     public Framebuffer(int width, int height)
     {
+        //constructor
         this._width = width;
         this._height = height;
-        _framebuffer = new Byte[width * height];
+        //1 dimensional array for faster storage access
+        _framebuffer = new byte[width * height];
 
     }
 
-    public void SetPixel(int x, int y, Byte brightness)
+    public void SetPixel(int x, int y, byte brightness)
     {
-        if (x < _width && y < _height)
+        //checking borders
+        if (x < _width && y < _height && x >= 0 && y >= 0)
         {
+            // index = y * width + x | x = index % width | y = index / width (Ganzzahldivision?)
             _framebuffer[y* _width +x] = brightness;
         }
     }
 
-    public int GetPixel(int x, int y)
+    public byte GetPixel(int x, int y)
     {
+        //get pixel at pos x,y
         if (x < _width && y < _height)  return _framebuffer[y* _width +x];
-        else return -1;
+        else return 0;
     }
-
+    
     public int GetHeight()
     {
         return _height;
