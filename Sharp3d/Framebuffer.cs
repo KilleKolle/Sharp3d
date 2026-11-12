@@ -2,8 +2,8 @@ namespace Sharp3d;
 
 public class Framebuffer
 {
-    private int _width;
-    private int _height;
+    private readonly int _width;
+    private readonly int _height;
     private uint[] _framebuffer;
     public Framebuffer(int width, int height)
     {
@@ -25,11 +25,14 @@ public class Framebuffer
         }
     }
 
-    public uint GetPixel(int x, int y)
+    private uint GetPixel(int x, int y)
     {
         //get pixel at pos x,y
-        if (x < _width && y < _height)  return _framebuffer[y* _width +x];
-        else return 0;
+        if (x < _width && y < _height)
+        {
+            return _framebuffer[y * _width + x];
+        }
+        return 0;
     }
     
     public int GetHeight()
@@ -53,7 +56,7 @@ public class Framebuffer
         return rgbt;
     }
 
-    public byte IntToRgb(uint rgb, uint p)
+    private byte IntToRgb(uint rgb, uint p)
     {
         return (byte)((rgb >> (int)(p * 8)) & 0xFF);
     }
@@ -76,5 +79,11 @@ public class Framebuffer
     public byte GetT(int x, int y)
     {
         return IntToRgb(GetPixel(x, y), 3);
+    }
+
+    public byte GetBrightness(int x, int y)
+    {
+        byte brightness = (byte)(0.2126 * GetR(x, y) + 0.7152 * GetG(x, y) + 0.0722 * GetB(x, y));
+        return brightness;
     }
 }
