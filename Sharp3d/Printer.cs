@@ -9,7 +9,7 @@ public class Printer
         {
             for (int loopX = 0; loopX < framebuffer.GetWidth(); loopX++)
             {
-                Console.Write(ToSymbol(framebuffer.GetPixel(loopX, loopY)));
+                Console.Write(ToSymbol(framebuffer.GetT(loopX, loopY)));
             }
             Console.WriteLine();
         }
