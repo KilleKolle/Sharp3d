@@ -45,8 +45,12 @@ public class Framebuffer
     private uint RgbToInt(byte r, byte g, byte b, byte transparency)
     {
         //rr gg bb tt
-            uint rgbt = ((uint)r * 10) + ((uint)g * 100) + ((uint)b * 1000) + ((uint)transparency * 10000);
-            return rgbt;
+        uint rgbt = 0;
+            rgbt += (uint)r << (0*8);
+            rgbt += (uint)g << (1*8);
+            rgbt += (uint)b << (2*8);
+            rgbt += (uint)transparency << (3*8);
+        return rgbt;
     }
 
     public byte IntToRgb(uint rgb, uint p)
@@ -56,21 +60,21 @@ public class Framebuffer
 
     public byte GetR(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 1);
+        return IntToRgb(GetPixel(x, y), 0);
     }
 
     public byte GetG(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 2);
+        return IntToRgb(GetPixel(x, y), 1);
     }
 
     public byte GetB(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 3);
+        return IntToRgb(GetPixel(x, y), 2);
     }
 
     public byte GetT(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 4);
+        return IntToRgb(GetPixel(x, y), 3);
     }
 }
