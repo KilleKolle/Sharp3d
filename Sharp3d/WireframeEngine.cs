@@ -13,5 +13,19 @@ public class WireframeEngine
         _frameBuffer = new FrameBuffer(_width, _height);
         _depthbuffer = new DepthBuffer( _width, _height);
     }
-    
+
+    public void ClearPixels()
+    {
+        
+    }
+
+    private void DrawLine(int fromX, int toX, int fromY, int toY)
+    {
+        
+    }
+
+    private void ProjectTo2D()
+    {
+        
+    }
 }
