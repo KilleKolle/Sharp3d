@@ -5,18 +5,18 @@ namespace Sharp3d;
 public class DepthBuffer
 {
     private readonly int _width;
-    private readonly int _heigth;
+    private readonly int _height;
     private float[] _depthbuffer;
-    public DepthBuffer(int width, int heigth)
+    public DepthBuffer(int width, int height)
     {
         this._width = width;
-        this._heigth = heigth;
-        _depthbuffer = new float[_width * _heigth];
+        this._height = height;
+        _depthbuffer = new float[_width * _height];
     }
 
     public void SetDepth(int x, int y, float depth)
     {
-        if (x >= 0 && x < _width && y >= 0 && y < _heigth)
+        if (x >= 0 && x < _width && y >= 0 && y < _height)
         {
             _depthbuffer[y * _width + x] = depth;
         }
@@ -24,7 +24,6 @@ public class DepthBuffer
 
     public float GetDepth(int x, int y)
     {
-        
         return _depthbuffer[y * _width +x];
     }
 
@@ -35,6 +34,14 @@ public class DepthBuffer
 
     public int GetHeigth()
     {
-        return _heigth;
+        return _height;
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < _depthbuffer.Length; i++)
+        {
+            _depthbuffer[i] = float.MaxValue;
+        }
     }
 }

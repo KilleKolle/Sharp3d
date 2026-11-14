@@ -5,7 +5,7 @@ public class Printer
     public void Print(FrameBuffer frameBuffer)
     {
         //Converting every pixels brightness to ascii char
-        for (int loopY = 0; loopY < frameBuffer.GetHeigth(); loopY++)
+        for (int loopY = 0; loopY < frameBuffer.GetHeight(); loopY++)
         {
             for (int loopX = 0; loopX < frameBuffer.GetWidth(); loopX++)
             {

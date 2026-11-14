@@ -3,13 +3,13 @@ namespace Sharp3d;
 public class FrameBuffer
 {
     private readonly int _width;
-    private readonly int _heigth;
+    private readonly int _height;
     private uint[] _framebuffer;
     public FrameBuffer(int width, int height)
     {
         //constructor
         this._width = width;
-        this._heigth = height;
+        this._height = height;
         //1 dimensional array for faster storage access
         _framebuffer = new uint[width * height];
 
@@ -18,7 +18,7 @@ public class FrameBuffer
     public void SetPixel(int x, int y, byte r, byte g, byte b, byte transparency)
     {
         //checking borders
-        if(x >= 0 && x < _width && y >= 0 && y < _heigth)
+        if(x >= 0 && x < _width && y >= 0 && y < _height)
         {
             // index = y * width + x | x = index % width | y = index / width (Ganzzahldivision?)
             _framebuffer[y* _width +x] = RgbToInt(r, g, b, transparency);
@@ -28,16 +28,16 @@ public class FrameBuffer
     private uint GetPixel(int x, int y)
     {
         //get pixel at pos x,y
-        if(x >= 0 && x < _width && y >= 0 && y < _heigth)
+        if(x >= 0 && x < _width && y >= 0 && y < _height)
         {
             return _framebuffer[y * _width + x];
         }
         return 0;
     }
     
-    public int GetHeigth()
+    public int GetHeight()
     {
-        return _heigth;
+        return _height;
     }
 
     public int GetWidth()
@@ -86,4 +86,13 @@ public class FrameBuffer
         byte brightness = (byte)(0.2126 * GetR(x, y) + 0.7152 * GetG(x, y) + 0.0722 * GetB(x, y));
         return brightness;
     }
+
+    public void Clear()
+    {
+        for (int i = 0; i < _framebuffer.Length; i++)
+        {
+            _framebuffer[i] = 0;
+        }
+    }
+
 }

@@ -2,8 +2,8 @@ namespace Sharp3d;
 
 public class WireframeEngine
 {
-    private int _width;
-    private int _height;
+    private readonly int _width;
+    private readonly int _height;
     private DepthBuffer _depthbuffer;
     private FrameBuffer _frameBuffer;
     public WireframeEngine(int width, int height)
