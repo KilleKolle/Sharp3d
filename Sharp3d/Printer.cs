@@ -2,14 +2,14 @@ namespace Sharp3d;
 
 public class Printer
 {
-    public void Print(Framebuffer framebuffer)
+    public void Print(FrameBuffer frameBuffer)
     {
         //Converting every pixels brightness to ascii char
-        for (int loopY = 0; loopY < framebuffer.GetHeight(); loopY++)
+        for (int loopY = 0; loopY < frameBuffer.GetHeigth(); loopY++)
         {
-            for (int loopX = 0; loopX < framebuffer.GetWidth(); loopX++)
+            for (int loopX = 0; loopX < frameBuffer.GetWidth(); loopX++)
             {
-                Console.Write(ToSymbol(framebuffer.GetBrightness(loopX, loopY)));
+                Console.Write(ToSymbol(frameBuffer.GetBrightness(loopX, loopY)));
             }
             Console.WriteLine();
         }

@@ -1,15 +1,15 @@
 namespace Sharp3d;
 
-public class Framebuffer
+public class FrameBuffer
 {
     private readonly int _width;
-    private readonly int _height;
+    private readonly int _heigth;
     private uint[] _framebuffer;
-    public Framebuffer(int width, int height)
+    public FrameBuffer(int width, int height)
     {
         //constructor
         this._width = width;
-        this._height = height;
+        this._heigth = height;
         //1 dimensional array for faster storage access
         _framebuffer = new uint[width * height];
 
@@ -18,7 +18,7 @@ public class Framebuffer
     public void SetPixel(int x, int y, byte r, byte g, byte b, byte transparency)
     {
         //checking borders
-        if (x < _width && y < _height && x >= 0 && y >= 0)
+        if(x >= 0 && x < _width && y >= 0 && y < _heigth)
         {
             // index = y * width + x | x = index % width | y = index / width (Ganzzahldivision?)
             _framebuffer[y* _width +x] = RgbToInt(r, g, b, transparency);
@@ -28,16 +28,16 @@ public class Framebuffer
     private uint GetPixel(int x, int y)
     {
         //get pixel at pos x,y
-        if (x < _width && y < _height)
+        if(x >= 0 && x < _width && y >= 0 && y < _heigth)
         {
             return _framebuffer[y * _width + x];
         }
         return 0;
     }
     
-    public int GetHeight()
+    public int GetHeigth()
     {
-        return _height;
+        return _heigth;
     }
 
     public int GetWidth()

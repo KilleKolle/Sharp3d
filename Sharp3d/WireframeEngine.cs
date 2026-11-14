@@ -4,12 +4,14 @@ public class WireframeEngine
 {
     private int _width;
     private int _height;
-    private Framebuffer _framebuffer;
+    private DepthBuffer _depthbuffer;
+    private FrameBuffer _frameBuffer;
     public WireframeEngine(int width, int height)
     {
         _width = width;
         _height = height;
-        _framebuffer = new Framebuffer(_width, _height);
+        _frameBuffer = new FrameBuffer(_width, _height);
+        _depthbuffer = new DepthBuffer( _width, _height);
     }
     
 }
