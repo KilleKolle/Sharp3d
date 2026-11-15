@@ -19,7 +19,7 @@ public class WireframeEngine
         
     }
 
-    private void DrawLine(int fromX, int toX, int fromY, int toY)
+    private void DrawLine(int fromX, int fromY, int toX,  int toY)
     {
         
     }
