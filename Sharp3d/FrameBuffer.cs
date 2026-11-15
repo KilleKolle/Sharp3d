@@ -18,21 +18,22 @@ public class FrameBuffer
     public void SetPixel(int x, int y, byte r, byte g, byte b, byte transparency)
     {
         //checking borders
-        if(x >= 0 && x < _width && y >= 0 && y < _height)
+        if(IsInside(x,y))
         {
             // index = y * width + x | x = index % width | y = index / width (Ganzzahldivision?)
             _framebuffer[y* _width +x] = RgbToInt(r, g, b, transparency);
         }
+
     }
 
     private uint GetPixel(int x, int y)
     {
         //get pixel at pos x,y
-        if(x >= 0 && x < _width && y >= 0 && y < _height)
+        if(IsInside(x, y))
         {
             return _framebuffer[y * _width + x];
         }
-        return 0;
+        throw new ArgumentOutOfRangeException(nameof(GetPixel));
     }
     
     public int GetHeight()
@@ -63,28 +64,30 @@ public class FrameBuffer
 
     public byte GetR(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 0);
+            return IntToRgb(GetPixel(x, y), 0);
     }
 
     public byte GetG(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 1);
+            return IntToRgb(GetPixel(x, y), 1);
     }
 
     public byte GetB(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 2);
+            return IntToRgb(GetPixel(x, y), 2);
     }
 
     public byte GetT(int x, int y)
     {
-        return IntToRgb(GetPixel(x, y), 3);
+            return IntToRgb(GetPixel(x, y), 3);
     }
 
     public byte GetBrightness(int x, int y)
     {
-        byte brightness = (byte)(0.2126 * GetR(x, y) + 0.7152 * GetG(x, y) + 0.0722 * GetB(x, y));
-        return brightness;
+
+            byte brightness = (byte)(0.2126 * GetR(x, y) + 0.7152 * GetG(x, y) + 0.0722 * GetB(x, y));
+            return brightness;
+        throw new ArgumentOutOfRangeException();
     }
 
     public void Clear()
@@ -93,6 +96,16 @@ public class FrameBuffer
         {
             _framebuffer[i] = 0;
         }
+    }
+
+    public bool IsInside(int x, int y)
+    {
+        if (x >= 0 && x < _width && y >= 0 && y < _height)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }

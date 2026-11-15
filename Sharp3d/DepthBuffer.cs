@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace Sharp3d;
 
 public class DepthBuffer
@@ -16,7 +14,7 @@ public class DepthBuffer
 
     public void SetDepth(int x, int y, float depth)
     {
-        if (x >= 0 && x < _width && y >= 0 && y < _height)
+        if (IsInside(x,y))
         {
             _depthbuffer[y * _width + x] = depth;
         }
@@ -24,7 +22,11 @@ public class DepthBuffer
 
     public float GetDepth(int x, int y)
     {
-        return _depthbuffer[y * _width +x];
+        if (IsInside(x, y))
+        {
+            return _depthbuffer[y * _width +x];
+        }
+        throw new ArgumentOutOfRangeException(nameof(GetDepth));
     }
 
     public int GetWidth()
@@ -32,7 +34,7 @@ public class DepthBuffer
         return _width;
     }
 
-    public int GetHeigth()
+    public int GetHeight()
     {
         return _height;
     }
@@ -44,4 +46,13 @@ public class DepthBuffer
             _depthbuffer[i] = float.MaxValue;
         }
     }
+    public bool IsInside(int x, int y)
+    {
+        if (x >= 0 && x < _width && y >= 0 && y < _height)
+        {
+            return true;
+        }
+        return false;
+    }
+    
 }
