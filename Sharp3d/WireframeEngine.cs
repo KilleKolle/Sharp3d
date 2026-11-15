@@ -16,10 +16,11 @@ public class WireframeEngine
 
     public void ClearPixels()
     {
-        
+        _frameBuffer.Clear();
+        _depthbuffer.Clear();
     }
 
-    private void DrawLine(int fromX, int fromY, int toX,  int toY)
+    private void DrawLine(int fromX, int fromY, int toX,  int toY, byte r, byte g, byte b, byte t)
     {
         
     }
@@ -28,4 +29,10 @@ public class WireframeEngine
     {
         
     }
+
+    public void RenderFrame(World szene)
+    {
+    ClearPixels();    
+    }
+    
 }
